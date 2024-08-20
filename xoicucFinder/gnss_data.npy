@@ -1,0 +1,18 @@
+import numpy as np
+
+# Giả lập dữ liệu GNSS
+np.random.seed(42)
+n = 1000
+tau_true = [300, 600]
+mu_true = [0, 1, -1]
+sigma_true = 0.5
+
+# Tạo dữ liệu giả lập
+data = np.concatenate([
+    np.random.normal(mu_true[0], sigma_true, tau_true[0]),
+    np.random.normal(mu_true[1], sigma_true, tau_true[1] - tau_true[0]),
+    np.random.normal(mu_true[2], sigma_true, n - tau_true[1])
+])
+
+# Lưu dữ liệu vào tệp numpy
+np.save('gnss_data.npy', data)
